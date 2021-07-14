@@ -3,6 +3,10 @@
 
 ## 使用予定技術
 ・MVVM
+
 ・Retrofit
+
 ・LiveData
+
 ・Coroutines
+
