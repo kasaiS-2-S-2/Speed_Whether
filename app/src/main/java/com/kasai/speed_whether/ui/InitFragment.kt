@@ -23,13 +23,11 @@ class InitFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false) //dataBinding
         binding.lifecycleOwner = this
-        Log.d("zaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaa")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel;
-        Log.d("aaaaaaaaaaaaaaaaaaaaa", "ああああああああああああああああ")
     }
 }
