@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.data
+package com.kasai.speed_whether.viewModel
 
 import androidx.lifecycle.ViewModel
 

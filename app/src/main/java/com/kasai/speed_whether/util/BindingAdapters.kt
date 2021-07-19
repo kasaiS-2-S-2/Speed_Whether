@@ -27,7 +27,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import com.kasai.speed_whether.R
-import com.kasai.speed_whether.data.Popularity
+import com.kasai.speed_whether.viewModel.Popularity
 
 /**
  * A Binding Adapter that is called whenever the value of the attribute `app:popularityIcon`

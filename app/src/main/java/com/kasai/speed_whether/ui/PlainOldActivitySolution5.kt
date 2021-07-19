@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.kasai.speed_whether.R
-import com.kasai.speed_whether.data.SimpleViewModelSolution
+import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
 import com.kasai.speed_whether.databinding.PlainActivitySolution5Binding
 
 /**

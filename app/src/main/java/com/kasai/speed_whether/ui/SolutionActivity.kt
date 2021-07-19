@@ -17,14 +17,10 @@
 package com.kasai.speed_whether.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import com.kasai.speed_whether.R
-import com.kasai.speed_whether.data.SimpleViewModelSolution
-import com.kasai.speed_whether.databinding.SolutionBinding
+import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
 
 /**
  * Final codelab solution.

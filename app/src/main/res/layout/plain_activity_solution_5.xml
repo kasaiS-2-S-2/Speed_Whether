@@ -23,7 +23,7 @@
 
         <variable
             name="viewmodel"
-            type="com.kasai.speed_whether.data.SimpleViewModelSolution"/>
+            type="com.kasai.speed_whether.viewModel.SimpleViewModelSolution"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

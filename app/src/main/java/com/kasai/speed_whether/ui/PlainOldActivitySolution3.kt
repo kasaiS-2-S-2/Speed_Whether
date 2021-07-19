@@ -29,8 +29,8 @@ import androidx.core.widget.ImageViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.kasai.speed_whether.R
-import com.kasai.speed_whether.data.Popularity
-import com.kasai.speed_whether.data.SimpleViewModel
+import com.kasai.speed_whether.viewModel.Popularity
+import com.kasai.speed_whether.viewModel.SimpleViewModel
 import com.kasai.speed_whether.databinding.PlainActivitySolution3Binding
 
 /**

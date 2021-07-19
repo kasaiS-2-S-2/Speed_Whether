@@ -24,7 +24,11 @@
 
         <variable
             name="viewmodel"
-            type="com.kasai.speed_whether.data.SimpleViewModelSolution"/>
+            type="com.kasai.speed_whether.viewModel.SimpleViewModelSolution"/>
+
+        <variable
+            name="wheatherInfoViewModel"
+            type="com.kasai.speed_whether.viewModel.WeatherInfoViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -161,6 +165,16 @@
             app:progressScaled="@{viewmodel.likes}"
             app:progressTint="@{viewmodel.popularity}"
             tools:progressBackgroundTint="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/currentWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(wheatherInfoViewModel.weatherInfoLiveData.Current.temp)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
