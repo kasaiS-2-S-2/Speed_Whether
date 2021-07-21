@@ -23,11 +23,26 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import com.kasai.speed_whether.R
+import com.kasai.speed_whether.model.WeatherInfo
 import com.kasai.speed_whether.viewModel.Popularity
+
+@BindingAdapter("app:showHourlyTemp")
+fun showHourlyTemp(view: TextView, hourlyWhetherTemps: List<WeatherInfo.Hourly>?) {
+
+    var hourlyTemps = ""
+    if (hourlyWhetherTemps != null) { //ここらへん汚い書き方な気がする
+        for (item in hourlyWhetherTemps) {
+            hourlyTemps = hourlyTemps + "\n" + item.temp
+        }
+    }
+
+    view.setText(hourlyTemps)
+}
 
 /**
  * A Binding Adapter that is called whenever the value of the attribute `app:popularityIcon`

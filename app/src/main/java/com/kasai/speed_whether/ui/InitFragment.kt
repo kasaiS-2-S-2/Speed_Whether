@@ -40,7 +40,6 @@ class InitFragment : Fragment() {
 
     //observe開始
     private fun observeWeatherInfoViewModel(viewModel: WeatherInfoViewModel) {
-
         //データをSTARTED かRESUMED状態である場合にのみ、アップデートするように、LifecycleOwnerを紐付け、ライフサイクル内にオブザーバを追加
         viewModel.weatherInfoLiveData.observe(viewLifecycleOwner, Observer { weatherInfo ->
             if (weatherInfo != null) {
