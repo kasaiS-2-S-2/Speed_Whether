@@ -36,13 +36,16 @@ class InitFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel;
         observeWeatherInfoViewModel(weatherInfoViewModel)
+        Log.d("AAAAAAAAAAAAAAAA4", "AAAAAAAAAAAAAAAAAAAAA")
     }
 
     //observe開始
     private fun observeWeatherInfoViewModel(viewModel: WeatherInfoViewModel) {
         //データをSTARTED かRESUMED状態である場合にのみ、アップデートするように、LifecycleOwnerを紐付け、ライフサイクル内にオブザーバを追加
         viewModel.weatherInfoLiveData.observe(viewLifecycleOwner, Observer { weatherInfo ->
+            Log.d("AAAAAAAAAAAAAAAA5", "AAAAAAAAAAAAAAAAAAAAA")
             if (weatherInfo != null) {
+                Log.d("AAAAAAAAAAAAAAAA6", "AAAAAAAAAAAAAAAAAAAAA")
                 binding.wheatherInfoViewModel = viewModel
                 Log.d("AAAAAAAAAAAAAAAAAAAA",
                     (viewModel.weatherInfoLiveData.value as WeatherInfo).current.temp.toString() + "" + (viewModel.weatherInfoLiveData.value as WeatherInfo).current.clouds.toString()

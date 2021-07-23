@@ -29,6 +29,7 @@
         <variable
             name="wheatherInfoViewModel"
             type="com.kasai.speed_whether.viewModel.WeatherInfoViewModel"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

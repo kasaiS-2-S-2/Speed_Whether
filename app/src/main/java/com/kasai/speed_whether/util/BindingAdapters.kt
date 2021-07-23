@@ -37,7 +37,8 @@ fun showHourlyTemp(view: TextView, hourlyWhetherTemps: List<WeatherInfo.Hourly>?
     var hourlyTemps = ""
     if (hourlyWhetherTemps != null) { //ここらへん汚い書き方な気がする
         for (item in hourlyWhetherTemps) {
-            hourlyTemps = hourlyTemps + "\n" + item.temp
+            val temp = Math.round(item.temp - 273.15)
+            hourlyTemps = hourlyTemps + "\n" + temp
         }
     }
 
