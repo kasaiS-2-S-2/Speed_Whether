@@ -31,18 +31,32 @@ import com.kasai.speed_whether.R
 import com.kasai.speed_whether.model.WeatherInfo
 import com.kasai.speed_whether.viewModel.Popularity
 
-@BindingAdapter("app:showHourlyTemp")
-fun showHourlyTemp(view: TextView, hourlyWhetherTemps: List<WeatherInfo.Hourly>?) {
+@BindingAdapter("app:showAllHourlyTemp")
+fun showAllHourlyTemp(view: TextView, hourlyWeatherTemps: List<WeatherInfo.Hourly>?) {
 
     var hourlyTemps = ""
-    if (hourlyWhetherTemps != null) { //ここらへん汚い書き方な気がする
-        for (item in hourlyWhetherTemps) {
+    if (hourlyWeatherTemps != null) { //ここらへん汚い書き方な気がする
+        for (item in hourlyWeatherTemps) {
             val temp = Math.round(item.temp - 273.15)
             hourlyTemps = hourlyTemps + "\n" + temp
         }
     }
 
     view.setText(hourlyTemps)
+}
+
+@BindingAdapter("hourlyTemps", "position", requireAll = true)
+fun showHourlyTemp(view: TextView, hourlyTemps: List<WeatherInfo.Hourly>?, position: Int) {
+
+    val hourlyTemp = hourlyTemps?.get(position)?.temp
+    var tempsWithC: Long = 0
+    if (hourlyTemp != null) {
+        tempsWithC = Math.round(hourlyTemp - 273.15)
+    }
+
+    val hourlyTempString = " " + tempsWithC + " "
+
+    view.setText(hourlyTempString)
 }
 
 /**
