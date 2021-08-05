@@ -24,4 +24,5 @@
     <string name="name_label">Name</string>
     <string name="profile_avatar_cd">Profile\'s avatar</string>
     <string name="like">Like</string>
+    <string name="current_place_permisstion_denied_meg">位置情報へのアクセスを許可すると、現在地の天気情報を取得できるようになります。</string>
 </resources>

@@ -16,10 +16,23 @@
 
 package com.kasai.speed_whether.viewModel
 
+import android.Manifest
+import android.content.ContentValues.TAG
+import android.content.pm.PackageManager
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.common.api.ApiException
+import com.google.android.libraries.places.api.Places.createClient
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.PlaceLikelihood
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
+import com.google.android.libraries.places.api.net.PlacesClient
 
 /**
  * A VM for [com.example.android.databinding.basicsample.ui.SolutionActivity].
@@ -28,10 +41,12 @@ class SimpleViewModelSolution : ViewModel() {
     private val _name = MutableLiveData("Ada")
     private val _lastName = MutableLiveData("Lovelace")
     private val _likes =  MutableLiveData(0)
+    private val _currentPlace = MutableLiveData(listOf(35.68, 139.77))
 
     val name: LiveData<String> = _name
     val lastName: LiveData<String> = _lastName
     val likes: LiveData<Int> = _likes
+    val currentPlace: LiveData<List<Double>> = _currentPlace
 
     // popularity is exposed as LiveData using a Transformation instead of a @Bindable property.
     val popularity: LiveData<Popularity> = Transformations.map(_likes) {
