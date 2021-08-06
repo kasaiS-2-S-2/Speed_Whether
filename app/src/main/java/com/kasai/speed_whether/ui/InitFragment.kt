@@ -49,7 +49,7 @@ class InitFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Initialize the SDK
         //gitにはapikeyのcommit禁止！
-        Places.initialize(requireActivity().getApplicationContext(), "AIzaSyCwuqJyfm31-O0ZwEa-xtumC5yEUBGYFX4")
+        Places.initialize(requireActivity().getApplicationContext(), "apikey")
 
         binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false) //dataBinding
         binding.lifecycleOwner = this
