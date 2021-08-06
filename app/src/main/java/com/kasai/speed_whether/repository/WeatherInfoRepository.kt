@@ -11,7 +11,7 @@ class WeatherInfoRepository {
 
     companion object Factory {
         val instance: WeatherInfoRepository
-            @Synchronized get() { //このアノテーションの意味確認！
+            @Synchronized get() { //このアノテーションの意味確認！ → https://qiita.com/leebon93/items/c7f2ac357f36930ff77f
                 return WeatherInfoRepository()
             }
     }

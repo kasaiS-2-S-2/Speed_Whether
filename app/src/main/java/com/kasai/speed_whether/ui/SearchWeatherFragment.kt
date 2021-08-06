@@ -33,9 +33,9 @@ import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
 import com.kasai.speed_whether.viewModel.WeatherInfoViewModel
 
 
-//const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
+const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
 
-class InitFragment : Fragment() {
+class SearchWeatherFragment : Fragment() {
 
     private val viewModel: SimpleViewModelSolution by viewModels()
     private lateinit var binding: SolutionBinding
@@ -59,7 +59,6 @@ class InitFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
-        binding.initFragment = this
         observeWeatherInfoViewModel(weatherInfoViewModel)
         Log.d("AAAAAAAAAAAAAAAA4", "AAAAAAAAAAAAAAAAAAAAA")
         //var button = requireActivity().findViewById<Button>(R.id.getCurrentPlaceButton)
