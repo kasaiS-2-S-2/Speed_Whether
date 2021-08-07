@@ -22,7 +22,7 @@ class CurrentPlaceInfoViewModel(application: Application) : AndroidViewModel(app
 
     val permissionRequest: LiveData<String> = _permissionRequest
 
-    //MVVMではない
+
     fun getCurrentPlace() {
         // Use fields to define the data types to return.
         val placeFields: List<Place.Field> = listOf(Place.Field.NAME)
@@ -59,11 +59,6 @@ class CurrentPlaceInfoViewModel(application: Application) : AndroidViewModel(app
                 }
             }
         } else {
-            // A local method to request required permissions;
-            // See https://developer.android.com/training/permissions/requesting
-            //val requestPermissionLauncher = getRequestPermissionLauncher()
-            //requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-
             Log.d("CurrentPlaceInfoVM", "not granted")
         }
     }

@@ -3,13 +3,19 @@ package com.kasai.speed_whether.ui
 import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.audiofx.BassBoost
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +43,8 @@ import com.kasai.speed_whether.viewModel.WeatherInfoViewModel
 
 class InitFragment : Fragment() {
 
+    private val requestPermissionLauncher = getRequestPermissionLauncher()
+
     private val viewModel: SimpleViewModelSolution by viewModels()
     private lateinit var binding: SolutionBinding
 
@@ -51,7 +59,7 @@ class InitFragment : Fragment() {
         //gitにはapikeyのcommit禁止！
         Places.initialize(requireActivity().getApplicationContext(), "apikey")
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false) //dataBinding
+        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -64,7 +72,7 @@ class InitFragment : Fragment() {
         Log.d("AAAAAAAAAAAAAAAA4", "AAAAAAAAAAAAAAAAAAAAA")
         //var button = requireActivity().findViewById<Button>(R.id.getCurrentPlaceButton)
         //button.setOnClickListener { getCurrentPlace() }
-        getCurrentPlace()
+        //getCurrentPlace()
     }
 
     override fun onAttach(activity: Activity) {
@@ -96,13 +104,15 @@ class InitFragment : Fragment() {
     }
 
     fun getCurrentPlace() {
-        Log.d("WWWWWWWWWWWWWWWWW1", "WWWWWWWWWWWWWWWWW")
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-            val requestPermissionLauncher = getRequestPermissionLauncher()
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            Log.d("WWWWWWWWWWWWWWWWW2", "WWWWWWWWWWWWWWWWW")
+                //val requestPermissionLauncher = getRequestPermissionLauncher()
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            } else {
+                currentPlaceInfoViewModel.getCurrentPlace()
+            }
         } else {
             currentPlaceInfoViewModel.getCurrentPlace()
         }
@@ -173,6 +183,15 @@ class InitFragment : Fragment() {
                     // decision.
                     val toast: Toast = Toast.makeText(activity, R.string.current_place_permisstion_denied_meg, Toast.LENGTH_LONG)
                     toast.show()
+
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    intent.data = Uri.fromParts(
+                        "package",
+                        activity?.applicationContext?.getPackageName(),
+                        null
+                    )
+                    activity?.applicationContext?.startActivity(intent)
                 }
             }
 
