@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.ui
+package com.kasai.speed_weather.ui
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -27,17 +27,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.kasai.speed_whether.R
-import com.kasai.speed_whether.viewModel.Popularity
-import com.kasai.speed_whether.viewModel.SimpleViewModel
-import com.kasai.speed_whether.databinding.PlainActivitySolution2Binding
+import com.kasai.speed_weather.R
+import com.kasai.speed_weather.viewModel.Popularity
+import com.kasai.speed_weather.viewModel.SimpleViewModel
 
 /**
- * Third version of the Activity in the codelab.
+ * Plain old activity with lots of problems to fix.
  */
-class PlainOldActivitySolution2 : AppCompatActivity() {
+class PlainOldActivity : AppCompatActivity() {
 
     // Obtain ViewModel from ViewModelProviders
     private val viewModel by lazy { ViewModelProviders.of(this).get(SimpleViewModel::class.java) }
@@ -45,13 +43,10 @@ class PlainOldActivitySolution2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: PlainActivitySolution2Binding =
-            DataBindingUtil.setContentView(this, R.layout.plain_activity_solution_2)
+        setContentView(R.layout.plain_activity)
 
-        binding.name = "Ada"
-        binding.lastName = "Lovelace"
-
-        // TODO: Explicitly setting initial values is a bad pattern. We'll fix that later on.
+        // TODO: Explicitly setting initial values is a bad pattern. We'll fix that.
+        updateName()
         updateLikes()
     }
 
@@ -62,6 +57,14 @@ class PlainOldActivitySolution2 : AppCompatActivity() {
     fun onLike(view: View) {
         viewModel.onLike()
         updateLikes()
+    }
+
+    /**
+     * So much findViewById! We'll fix that with Data Binding.
+     */
+    private fun updateName() {
+        findViewById<TextView>(R.id.plain_name).text = viewModel.name
+        findViewById<TextView>(R.id.plain_lastname).text = viewModel.lastName
     }
 
     /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.util
+package com.kasai.speed_weather.util
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -27,9 +27,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
-import com.kasai.speed_whether.R
-import com.kasai.speed_whether.model.WeatherInfo
-import com.kasai.speed_whether.viewModel.Popularity
+import com.kasai.speed_weather.R
+import com.kasai.speed_weather.model.WeatherInfo
+import com.kasai.speed_weather.viewModel.Popularity
 
 @BindingAdapter("app:showAllHourlyTemp")
 fun showAllHourlyTemp(view: TextView, hourlyWeatherTemps: List<WeatherInfo.Hourly>?) {

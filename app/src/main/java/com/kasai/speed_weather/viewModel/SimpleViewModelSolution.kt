@@ -14,25 +14,12 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.viewModel
+package com.kasai.speed_weather.viewModel
 
-import android.Manifest
-import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.common.api.ApiException
-import com.google.android.libraries.places.api.Places.createClient
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.PlaceLikelihood
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.google.android.libraries.places.api.net.PlacesClient
 
 /**
  * A VM for [com.example.android.databinding.basicsample.ui.SolutionActivity].

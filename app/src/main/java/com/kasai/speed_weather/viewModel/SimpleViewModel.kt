@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.viewModel
+package com.kasai.speed_weather.viewModel
 
 import androidx.lifecycle.ViewModel
 

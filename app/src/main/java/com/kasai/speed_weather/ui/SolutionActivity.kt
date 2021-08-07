@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.ui
+package com.kasai.speed_weather.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.kasai.speed_whether.R
-import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
-import com.kasai.speed_whether.databinding.PlainActivitySolution5Binding
+import com.kasai.speed_weather.R
+import com.kasai.speed_weather.viewModel.SimpleViewModelSolution
 
 /**
- * Fifth version of the Activity in the codelab.
+ * Final codelab solution.
  */
-class PlainOldActivitySolution5 : AppCompatActivity() {
+class SolutionActivity : AppCompatActivity() {
 
     // Obtain ViewModel from ViewModelProviders
     private val viewModel by lazy {
@@ -36,12 +34,24 @@ class PlainOldActivitySolution5 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        val binding: PlainActivitySolution5Binding =
-            DataBindingUtil.setContentView(this, R.layout.plain_activity_solution_5)
+        if (savedInstanceState == null) {
+            val fragment = InitFragment() //一覧のFragment
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_container, fragment, TAG_OF_PROJECT_LIST_FRAGMENT)
+                .commit()
+        }
+
+        /*
+        val binding: SolutionBinding =
+            DataBindingUtil.setContentView(this, R.layout.solution)
 
         binding.lifecycleOwner = this  // use Fragment.viewLifecycleOwner for fragments
 
         binding.viewmodel = viewModel
+
+         */
     }
 }

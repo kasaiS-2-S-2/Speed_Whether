@@ -1,6 +1,6 @@
-package com.kasai.speed_whether.repository
+package com.kasai.speed_weather.repository
 
-import com.kasai.speed_whether.model.WeatherInfo
+import com.kasai.speed_weather.model.WeatherInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

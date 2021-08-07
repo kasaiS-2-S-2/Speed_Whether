@@ -1,4 +1,4 @@
-package com.kasai.speed_whether.viewModel
+package com.kasai.speed_weather.viewModel
 
 import android.Manifest
 import android.app.Application

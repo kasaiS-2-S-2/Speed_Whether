@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kasai.speed_whether.util
+package com.kasai.speed_weather.util
 
 import android.view.View
 import androidx.databinding.BindingConversion

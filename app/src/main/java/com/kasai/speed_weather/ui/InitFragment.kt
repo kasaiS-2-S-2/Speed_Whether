@@ -1,15 +1,19 @@
-package com.kasai.speed_whether.ui
+package com.kasai.speed_weather.ui
 
 import android.Manifest
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,18 +28,20 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceLikelihood
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.kasai.speed_whether.R
-import com.kasai.speed_whether.databinding.SolutionBinding
-import com.kasai.speed_whether.model.WeatherInfo
-import com.kasai.speed_whether.util.HourlyWeatherInfoListAdapter
-import com.kasai.speed_whether.viewModel.CurrentPlaceInfoViewModel
-import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
-import com.kasai.speed_whether.viewModel.WeatherInfoViewModel
+import com.kasai.speed_weather.R
+import com.kasai.speed_weather.databinding.SolutionBinding
+import com.kasai.speed_weather.model.WeatherInfo
+import com.kasai.speed_weather.util.HourlyWeatherInfoListAdapter
+import com.kasai.speed_weather.viewModel.CurrentPlaceInfoViewModel
+import com.kasai.speed_weather.viewModel.SimpleViewModelSolution
+import com.kasai.speed_weather.viewModel.WeatherInfoViewModel
 
 
-const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
+//const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
 
-class SearchWeatherFragment : Fragment() {
+class InitFragment : Fragment() {
+
+    private val requestPermissionLauncher = getRequestPermissionLauncher()
 
     private val viewModel: SimpleViewModelSolution by viewModels()
     private lateinit var binding: SolutionBinding
@@ -49,9 +55,9 @@ class SearchWeatherFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Initialize the SDK
         //gitにはapikeyのcommit禁止！
-        Places.initialize(requireActivity().getApplicationContext(), "AIzaSyCwuqJyfm31-O0ZwEa-xtumC5yEUBGYFX4")
+        Places.initialize(requireActivity().getApplicationContext(), "AIzaSyBzTkpVyBTi8LPnW8MMddT8Lcp3h3WQYbE")
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false) //dataBinding
+        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -59,11 +65,12 @@ class SearchWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
+        binding.initFragment = this
         observeWeatherInfoViewModel(weatherInfoViewModel)
         Log.d("AAAAAAAAAAAAAAAA4", "AAAAAAAAAAAAAAAAAAAAA")
         //var button = requireActivity().findViewById<Button>(R.id.getCurrentPlaceButton)
         //button.setOnClickListener { getCurrentPlace() }
-        getCurrentPlace()
+        //getCurrentPlace()
     }
 
     override fun onAttach(activity: Activity) {
@@ -95,13 +102,15 @@ class SearchWeatherFragment : Fragment() {
     }
 
     fun getCurrentPlace() {
-        Log.d("WWWWWWWWWWWWWWWWW1", "WWWWWWWWWWWWWWWWW")
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+        if(Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-            val requestPermissionLauncher = getRequestPermissionLauncher()
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            Log.d("WWWWWWWWWWWWWWWWW2", "WWWWWWWWWWWWWWWWW")
+                //val requestPermissionLauncher = getRequestPermissionLauncher()
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            } else {
+                currentPlaceInfoViewModel.getCurrentPlace()
+            }
         } else {
             currentPlaceInfoViewModel.getCurrentPlace()
         }
@@ -172,6 +181,20 @@ class SearchWeatherFragment : Fragment() {
                     // decision.
                     val toast: Toast = Toast.makeText(activity, R.string.current_place_permisstion_denied_meg, Toast.LENGTH_LONG)
                     toast.show()
+
+                    //　アプリの詳細設定画面を開く
+                    val appDetailSettingsIntent = Intent(
+                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.parse("package:com.kasai.speed_weather")
+                    )
+                    appDetailSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    try {
+                        startActivity(appDetailSettingsIntent)
+                    } catch (error: ActivityNotFoundException) {
+                        val settingsIntent = Intent(android.provider.Settings.ACTION_SETTINGS)
+                        settingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(settingsIntent)
+                    }
                 }
             }
 

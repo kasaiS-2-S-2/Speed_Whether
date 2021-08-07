@@ -1,17 +1,10 @@
-package com.kasai.speed_whether.ui
+package com.kasai.speed_weather.ui
 
 import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.audiofx.BassBoost
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,20 +23,18 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceLikelihood
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
-import com.kasai.speed_whether.R
-import com.kasai.speed_whether.databinding.SolutionBinding
-import com.kasai.speed_whether.model.WeatherInfo
-import com.kasai.speed_whether.util.HourlyWeatherInfoListAdapter
-import com.kasai.speed_whether.viewModel.CurrentPlaceInfoViewModel
-import com.kasai.speed_whether.viewModel.SimpleViewModelSolution
-import com.kasai.speed_whether.viewModel.WeatherInfoViewModel
+import com.kasai.speed_weather.R
+import com.kasai.speed_weather.databinding.SolutionBinding
+import com.kasai.speed_weather.model.WeatherInfo
+import com.kasai.speed_weather.util.HourlyWeatherInfoListAdapter
+import com.kasai.speed_weather.viewModel.CurrentPlaceInfoViewModel
+import com.kasai.speed_weather.viewModel.SimpleViewModelSolution
+import com.kasai.speed_weather.viewModel.WeatherInfoViewModel
 
 
-//const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
+const val TAG_OF_PROJECT_LIST_FRAGMENT = "ProjectListFragment"
 
-class InitFragment : Fragment() {
-
-    private val requestPermissionLauncher = getRequestPermissionLauncher()
+class SearchWeatherFragment : Fragment() {
 
     private val viewModel: SimpleViewModelSolution by viewModels()
     private lateinit var binding: SolutionBinding
@@ -57,9 +48,9 @@ class InitFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Initialize the SDK
         //gitにはapikeyのcommit禁止！
-        Places.initialize(requireActivity().getApplicationContext(), "apikey")
+        Places.initialize(requireActivity().getApplicationContext(), "AIzaSyCwuqJyfm31-O0ZwEa-xtumC5yEUBGYFX4")
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.solution, container, false) //dataBinding
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -67,12 +58,11 @@ class InitFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewmodel = viewModel
-        binding.initFragment = this
         observeWeatherInfoViewModel(weatherInfoViewModel)
         Log.d("AAAAAAAAAAAAAAAA4", "AAAAAAAAAAAAAAAAAAAAA")
         //var button = requireActivity().findViewById<Button>(R.id.getCurrentPlaceButton)
         //button.setOnClickListener { getCurrentPlace() }
-        //getCurrentPlace()
+        getCurrentPlace()
     }
 
     override fun onAttach(activity: Activity) {
@@ -104,15 +94,13 @@ class InitFragment : Fragment() {
     }
 
     fun getCurrentPlace() {
-        if(Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        Log.d("WWWWWWWWWWWWWWWWW1", "WWWWWWWWWWWWWWWWW")
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
 
-                //val requestPermissionLauncher = getRequestPermissionLauncher()
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            } else {
-                currentPlaceInfoViewModel.getCurrentPlace()
-            }
+            val requestPermissionLauncher = getRequestPermissionLauncher()
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            Log.d("WWWWWWWWWWWWWWWWW2", "WWWWWWWWWWWWWWWWW")
         } else {
             currentPlaceInfoViewModel.getCurrentPlace()
         }
@@ -183,15 +171,6 @@ class InitFragment : Fragment() {
                     // decision.
                     val toast: Toast = Toast.makeText(activity, R.string.current_place_permisstion_denied_meg, Toast.LENGTH_LONG)
                     toast.show()
-
-                    val intent = Intent()
-                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    intent.data = Uri.fromParts(
-                        "package",
-                        activity?.applicationContext?.getPackageName(),
-                        null
-                    )
-                    activity?.applicationContext?.startActivity(intent)
                 }
             }
 

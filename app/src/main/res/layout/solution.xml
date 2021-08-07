@@ -19,19 +19,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.kasai.speed_whether.ui.SolutionActivity">
+    tools:context="com.kasai.speed_weather.ui.SolutionActivity">
 
     <data>
 
         <variable
             name="viewmodel"
-            type="com.kasai.speed_whether.viewModel.SimpleViewModelSolution"/>
+            type="com.kasai.speed_weather.viewModel.SimpleViewModelSolution"/>
 
         <variable
             name="weatherInfoViewModel"
-            type="com.kasai.speed_whether.viewModel.WeatherInfoViewModel"/>
+            type="com.kasai.speed_weather.viewModel.WeatherInfoViewModel"/>
 
-        <variable name="initFragment" type="com.kasai.speed_whether.ui.InitFragment" />
+        <variable name="initFragment" type="com.kasai.speed_weather.ui.InitFragment" />
 
     </data>
 

@@ -17,7 +17,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kasai.speed_whether">
+    package="com.kasai.speed_weather">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,12 +30,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.PlainOldActivity">
+        <activity android:name="com.kasai.speed_weather.ui.PlainOldActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SolutionActivity">
+        <activity android:name="com.kasai.speed_weather.ui.SolutionActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
