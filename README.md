@@ -1,14 +1,2 @@
 # Speed_Whether
-誠意製作中。ワンタッチで手軽な天気情報取得アプリです。
-
-## 使用予定技術
-・MVVM
-
-・DataBinding
-
-・LiveData
-
-・Retrofit
-
-・Coroutines
-
+ボツプロジェクト　→　修正版：https://github.com/kasaiS-2-S-2/Speed_Weather
